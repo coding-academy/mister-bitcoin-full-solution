@@ -6,9 +6,9 @@ export class ContactStore {
     @observable isLoading = false;
     @observable status = ''
     
-    constructor(rootStore, apiService) {
+    constructor(rootStore, contactService) {
         this.rootStore = rootStore
-        this.apiService = apiService
+        this.contactService = contactService
         this.fetchContacts()
     }
 
@@ -16,7 +16,7 @@ export class ContactStore {
     async fetchContacts(term = null) {
         const filterBy = {term}
         this.isLoading = true
-        this.contacts = await this.apiService.getContacts(filterBy)
+        this.contacts = await this.contactService.getContacts(filterBy)
         this.isLoading = false
     }
 
@@ -25,7 +25,7 @@ export class ContactStore {
         this.status = ''
         this.isLoading = true
         try {
-            this.selectedContact = await this.apiService.getContactById(id)
+            this.selectedContact = await this.contactService.getContactById(id)
         } catch(err) {
             this.status = 'error'
         } finally{
@@ -35,7 +35,7 @@ export class ContactStore {
 
     @action
     async saveContact(contact) {
-        const updatedContact = await this.apiService.saveContact(contact)
+        const updatedContact = await this.contactService.saveContact(contact)
         if (contact._id) {
             const index = this.contacts.findIndex(c => c._id === contact._id)
             this.contacts[index] = contact
@@ -49,7 +49,7 @@ export class ContactStore {
     @action
     async deleteContact(contact) {
         if (!contact._id) return
-        await this.apiService.deleteContact(contact._id)
+        await this.contactService.deleteContact(contact._id)
         await this.fetchContacts()
     }
 }

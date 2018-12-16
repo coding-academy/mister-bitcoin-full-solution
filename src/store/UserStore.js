@@ -4,24 +4,24 @@ export class UserStore {
     @observable isLoading = true;
     @observable isProcessing = true;
 
-    constructor(rootStore, apiService) {
+    constructor(rootStore, userService) {
         this.rootStore = rootStore
-        this.apiService = apiService
+        this.userService = userService
 
-        this.user = apiService.loadUser()
+        this.user = userService.loadUser()
     }
     
     @action
     signup(name) {
         this.isLoading = true
-        this.user = this.apiService.signup(name)
+        this.user = this.userService.signup(name)
         this.isLoading = false
     }
 
     @action
     transferCoins(contact, amount) {
         this.isProcessing = true
-        this.user = this.apiService.addMove(contact, amount)
+        this.user = this.userService.addMove(contact, amount)
         this.isProcessing = false
     }
 

@@ -1,0 +1,23 @@
+.signup {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0 0 0;
+}
+
+.signup-icon {
+    margin: 0 0 20px 0;
+}
+
+.signup-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.signup-title {
+    margin: 0 0 10px 0;
+}
+
+.actions-container {
+    margin: 10px 0;
+}

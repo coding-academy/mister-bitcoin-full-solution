@@ -1,0 +1,19 @@
+.contact-edit-header {
+  display: flex;
+  justify-content: space-between;
+  height: 40px; 
+}
+
+.contact-edit-header a:not(:last-child) {
+  margin: 0 10px 0 0; 
+}
+
+.contact-edit .form-actions-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0 0 0; 
+}
+
+.contact-edit .form-actions-container button {
+  cursor: pointer; 
+}

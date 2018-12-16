@@ -1,0 +1,34 @@
+.transfer-coins {
+  position: relative;
+  padding: 20px;
+  background: #7fc7ff;
+  border-radius: 5px;
+}
+
+.transfer-form {
+  display: flex;
+  justify-content: start;
+  margin: 20px 0 0 0;
+}
+
+.input-amount {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #D8D8D8;
+  background-color: #7fc7ff;
+  padding: 0 0 0 5px;
+  margin: 0 20px 0 5px;
+}
+
+.message-container {
+  position: absolute;
+  bottom: 2px;
+  font-size: 13px;
+  color: #008c07;
+}
+
+.error {
+  color: red;
+}

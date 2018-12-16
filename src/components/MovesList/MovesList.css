@@ -1,0 +1,21 @@
+.moves-list {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.moves-list-title {
+  font-weight: 600;
+  padding: 0 0 10px 0;
+}
+
+.moves-list-item:first-child {
+  border-top: 1px solid #cfcfcf;
+}
+.moves-list-item {
+  border-bottom: 1px solid #cfcfcf;
+  padding: 20px 0;
+}
+.moves-list-item .item-date{
+  margin: 10px 0 2px 0;
+}

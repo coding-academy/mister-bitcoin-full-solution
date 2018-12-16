@@ -60,7 +60,7 @@ class TransferCoins extends Component {
               <input 
                   className='input-amount'
                   value={this.amount}
-                  onInput={this.onInputChange}/>
+                  onChange={this.onInputChange}/>
             <div className='btn-submit'>
               <button type='submit' disabled={!this.amount}>Transfer</button>
             </div>

@@ -1,57 +1,49 @@
 import React, {Component} from 'react'
-import { observer, inject } from 'mobx-react';
-import { observable } from 'mobx';
-
 import './TransferCoins.css'
 
-@inject('store')
-@observer
 class TransferCoins extends Component {
 
-    @observable amount = ''
-    @observable message = ''
-    @observable error = ''
+    state = {
+      amount: '',
+      message: '',
+      error: ''
+    }
 
     onFormSubmit = (event) => {
       event.preventDefault()
-      if (!this.amount) return
+      const { amount } = this.state
+
+      if (!amount) return
   
-      const amount = Number(this.amount)
-      const userCoins = this.props.store.userStore.user.coins
+      const amountNum = Number(amount)
+      const maxCoins = this.props.maxCoins
 
-      if (!amount) {
-        this.error = 'Please enter a valid number'
+      if (!amountNum) {
+        this.setState({error: 'Please enter a valid number'})
         return
       }
       
-      if (amount < 0) {
-        this.error = 'Please enter a valid amount'
+      if (amountNum < 0) {
+        this.setState({error: 'Please enter a valid amount'})
         return
       }
 
-      if (amount > userCoins) {
-        this.error = `Insufficient funds, you have ${userCoins} coins`
+      if (amount > maxCoins) {
+        this.setState({error: `Insufficient funds, you have ${maxCoins} coins`})
         return
       }
       
-      this.props.store.userStore.transferCoins(this.props.contact, amount)
-      this.message = 'Transfer done!'
-      
-      setTimeout(() => this.resetValues(), 1000);
+      this.props.onTransferCoins(amountNum)
+      this.setState({amount: '', error: ''})
     }
   
-    resetValues() {
-      this.message = ''
-      this.amount = ''
-      this.error = ''
-    }
-
     onInputChange = (event) => {
-      this.amount = event.target.value
-      this.error = ''
+      this.setState({amount: event.target.value, error: ''})
     }
     
     render() {
+      const { amount, error, message } = this.state
+
       return (
         <div className='transfer-coins'>
           <div>Transfer coins to {this.props.contact.name}:</div>
@@ -59,15 +51,15 @@ class TransferCoins extends Component {
             <label>Amount:</label>
               <input 
                   className='input-amount'
-                  value={this.amount}
+                  value={amount}
                   onChange={this.onInputChange}/>
             <div className='btn-submit'>
-              <button type='submit' disabled={!this.amount}>Transfer</button>
+              <button type='submit' disabled={!amount}>Transfer</button>
             </div>
           </form>
           <div className='message-container'>
-            <div>{this.message ? this.message : ''}</div>
-            <div className='error'>{this.error ? this.error : ''}</div>
+            <div>{message}</div>
+            <div className='error'>{error}</div>
           </div>
         </div>
       )

@@ -1,26 +1,15 @@
-import React, {Component} from 'react';
-import { observer } from 'mobx-react';
-import { observable } from 'mobx';
+import React from 'react';
+import Input from '../Input/Input';
 import './ContactFilter.css'
-@observer
-class ContactFilter extends Component {
-    @observable term = '';
 
-    onInputChange = (ev) => {
-      this.term = ev.target.value;
-      this.props.onFilter(this.term);
-    }
+const ContactFilter = (props) => {
 
-    render(){
-        return (
-            <div className="contact-filter">
-                <input
-                    placeholder="Search"
-                    value={this.term}
-                    onChange={this.onInputChange} />
-            </div>
-        );
-    }
+    const field = {name: "search", value: props.term}
+    return (
+        <div className="contact-filter">
+            <Input field={field} onInput={props.onFilter} />
+        </div>
+    );
 }
 
 export default ContactFilter

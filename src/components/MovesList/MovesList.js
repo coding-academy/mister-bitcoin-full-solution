@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import './MovesList.css'
 
 @observer
-export default class MovesList extends Component {
+class MovesList extends Component {
 
   renderMoves() {
     const moves = this.props.moves
@@ -33,3 +33,5 @@ export default class MovesList extends Component {
     )
   }
 }
+
+export default MovesList

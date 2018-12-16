@@ -6,7 +6,7 @@ import './TransferCoins.css'
 
 @inject('store')
 @observer
-export default class TransferCoins extends Component {
+class TransferCoins extends Component {
 
     @observable amount = ''
     @observable message = ''
@@ -73,3 +73,5 @@ export default class TransferCoins extends Component {
       )
     }
   }
+
+  export default TransferCoins

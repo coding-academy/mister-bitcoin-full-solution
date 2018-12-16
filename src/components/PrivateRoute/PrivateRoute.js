@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 @inject('store')
 @observer
-export default class PrivateRoute extends React.Component {
+class PrivateRoute extends React.Component {
     
   render() {
     const { store, ...restProps } = this.props;
@@ -12,3 +12,5 @@ export default class PrivateRoute extends React.Component {
     return <Redirect to="/signup" />;
   }
 }
+
+export default PrivateRoute

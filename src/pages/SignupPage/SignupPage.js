@@ -31,7 +31,7 @@ class SignupPage extends Component {
         <form onSubmit={this.onFormSubmit} className="signup-form">
             <div className="signup-title">Please enter your name:</div>
 
-            <input value={this.name} onInput={this.onInputChange} />
+            <input value={this.name} onChange={this.onInputChange} />
             
             <div className="actions-container">
               <button type="submit">Sign up</button>

@@ -28,6 +28,7 @@ export class ContactStore {
             this.selectedContact = await this.contactService.getContactById(id)
         } catch(err) {
             this.status = 'error'
+            this.selectedContact = {}
         } finally{
             this.isLoading = false
         }

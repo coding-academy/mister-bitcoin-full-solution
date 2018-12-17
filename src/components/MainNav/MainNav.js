@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import homeImg from '../../assets/icons/home.png'
@@ -7,11 +7,9 @@ import usersImg from '../../assets/icons/users.png'
 
 import './MainNav.css'
 
-class MainNav extends Component {
-  
-  render() {
-    return (
-        <header className="main-nav">
+const MainNav = () => {
+  return (
+      <header className="main-nav">
         <NavLink exact className='main-nav-item' activeClassName='selected' to="/">
           <img src={homeImg} alt="Home" width="24px" height="24px" />
         </NavLink>
@@ -22,8 +20,7 @@ class MainNav extends Component {
           <img src={increaseImg} alt="Statistics" width="24px" height="24px" />
         </NavLink>
       </header>
-    );
-  }
+  );
 }
 
 export default MainNav;

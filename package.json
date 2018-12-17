@@ -83,7 +83,7 @@
     ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "./config/jest/setup.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -136,6 +136,10 @@
     "@storybook/addon-knobs": "^4.1.2",
     "@storybook/addons": "^4.1.1",
     "@storybook/react": "^4.1.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-15": "^1.2.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "react-test-renderer": "^16.6.3",
     "storybook-react-router": "^1.0.2"
   }
 }

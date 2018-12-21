@@ -1,20 +1,19 @@
 import { observable, action  } from 'mobx';
-
+import contactService from '../services/ContactService'
 export class ContactStore {
     @observable contacts = [];
     @observable selectedContact = {};
     @observable isLoading = false;
     @observable status = ''
     
-    constructor(rootStore, contactService) {
+    constructor(rootStore) {
         this.rootStore = rootStore
-        this.contactService = contactService
     }
 
     @action
     async fetchContacts(filterBy = null) {
         this.isLoading = true
-        this.contacts = await this.contactService.getContacts(filterBy)
+        this.contacts = await contactService.getContacts(filterBy)
         this.isLoading = false
     }
 
@@ -23,7 +22,7 @@ export class ContactStore {
         this.status = ''
         this.isLoading = true
         try {
-            this.selectedContact = await this.contactService.getContactById(id)
+            this.selectedContact = await contactService.getContactById(id)
         } catch(err) {
             this.status = 'error'
         } finally{
@@ -33,7 +32,7 @@ export class ContactStore {
 
     @action
     async saveContact(contact) {
-        const updatedContact = await this.contactService.saveContact(contact)
+        const updatedContact = await contactService.saveContact(contact)
         if (contact._id) {
             const index = this.contacts.findIndex(c => c._id === contact._id)
             this.contacts[index] = contact
@@ -47,7 +46,7 @@ export class ContactStore {
     @action
     async deleteContact(contact) {
         if (!contact._id) return
-        await this.contactService.deleteContact(contact._id)
+        await contactService.deleteContact(contact._id)
         await this.fetchContacts()
     }
 }

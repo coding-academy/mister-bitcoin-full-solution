@@ -4,7 +4,7 @@ import { observable } from 'mobx';
 
 import Chart from '../../components/Chart';
 
-import {BitcoinService} from '../../services/BitcoinService'
+import bitcoinService from '../../services/BitcoinService'
 import './StatisticPage.css'
 @inject('store')
 @observer
@@ -16,8 +16,8 @@ class StatisticPage extends Component {
 
   async componentDidMount() {
     this.loading = true
-    this.marketPrice = await BitcoinService.getMarketPrice()
-    this.confirmedTransactions = await BitcoinService.getConfirmedTransactions()
+    this.marketPrice = await bitcoinService.getMarketPrice()
+    this.confirmedTransactions = await bitcoinService.getConfirmedTransactions()
     this.loading = false
   }
 

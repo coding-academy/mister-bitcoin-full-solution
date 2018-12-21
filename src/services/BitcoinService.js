@@ -29,7 +29,7 @@ const getRequest = (url) => {
 
 
 
-export const BitcoinService = {
+export default {
     getBitcoinRate,
     getMarketPrice,
     getConfirmedTransactions

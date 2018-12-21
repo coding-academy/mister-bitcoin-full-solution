@@ -1,14 +1,15 @@
 import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import TransferCoins from '../../components/TransferCoins/TransferCoins'
-import MovesList from '../../components/MovesList/MovesList'
+import { observable } from 'mobx';
 
+import TransferCoins from '../../components/TransferCoins'
+import MovesList from '../../components/MovesList'
+
+import './ContactDetails.css'
 import imgAvatar from '../../assets/img_avatar.png'
 import backImg from '../../assets/icons/back.png'
 import editImg from '../../assets/icons/edit.png'
-import './ContactDetails.css'
-import { observable } from 'mobx';
 
 @inject('store')
 @observer

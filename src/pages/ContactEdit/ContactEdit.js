@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { observable  } from 'mobx';
 
 import ContactService from '../../services/ContactService'
-import Input from '../../components/Input/Input'
+import Input from '../../components/Input'
 
 import './ContactEdit.css'
 import imgAvatar from '../../assets/img_avatar.png'

@@ -27,7 +27,7 @@ const loadFromLocal = () => {
 
     return JSON.parse(user)
 }
-export const UserService = {
+export default {
     signup,
     loadUser,
     addMove

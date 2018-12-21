@@ -1,4 +1,4 @@
-import {UserService} from '../UserService'
+import userService from '../UserService'
 
 describe('UserService', () => {
     const name = "Muki"
@@ -7,7 +7,7 @@ describe('UserService', () => {
         expect.assertions(4)
 
         const name = "Muki"
-        const user = UserService.signup(name)
+        const user = userService.signup(name)
         expect(user).toBeTruthy()
         expect(user.name).toBe(name)
         expect(user.coins).toBe(100)
@@ -17,8 +17,8 @@ describe('UserService', () => {
     it('should load user successfully', () => {
         expect.assertions(2)
         
-        UserService.signup(name)
-        const user = UserService.loadUser()
+        userService.signup(name)
+        const user = userService.loadUser()
         expect(user).toBeTruthy()
         expect(user.name).toBe(name)
     })
@@ -26,8 +26,8 @@ describe('UserService', () => {
     it('should add move to user successfully', () => {
         expect.assertions(3)
 
-        UserService.signup(name)
-        const user = UserService.addMove({name: 'Puki', _id: '123'}, 3)
+        userService.signup(name)
+        const user = userService.addMove({name: 'Puki', _id: '123'}, 3)
         expect(user).toBeTruthy()
         expect(user.name).toBe(name)
         expect(user.coins).toBe(97)

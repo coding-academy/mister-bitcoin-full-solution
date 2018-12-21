@@ -1,4 +1,4 @@
-import {BitcoinService} from '../BitcoinService'
+import bitcoinService from '../BitcoinService'
 import axios from 'axios'
 
 jest.mock('axios')
@@ -14,7 +14,7 @@ describe('BitcoinService', () => {
         const resp = {data: 5};
         axios.get.mockResolvedValue(resp)
 
-        const value = await BitcoinService.getBitcoinRate(10)
+        const value = await bitcoinService.getBitcoinRate(10)
 
         expect(value).toBeTruthy()
         expect(axios.get).toBeCalled()
@@ -33,7 +33,7 @@ describe('BitcoinService', () => {
 
         axios.get.mockResolvedValue(resp)
 
-        const marketPriceRes = await BitcoinService.getMarketPrice(resp)
+        const marketPriceRes = await bitcoinService.getMarketPrice(resp)
 
         expect(marketPriceRes).toBeTruthy()
         expect(marketPriceRes.title).toBe(chartData.name)
@@ -59,7 +59,7 @@ describe('BitcoinService', () => {
 
         axios.get.mockResolvedValue(resp)
 
-        const result = await BitcoinService.getMarketPrice(resp)
+        const result = await bitcoinService.getMarketPrice(resp)
 
         expect(result).toBeTruthy()
         expect(result.title).toBe(chartData.name)

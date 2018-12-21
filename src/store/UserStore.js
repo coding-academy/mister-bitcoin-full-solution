@@ -1,27 +1,26 @@
 import { observable, action, computed  } from 'mobx';
+import userService from '../services/UserService'
 export class UserStore {
     @observable user = null;
     @observable isLoading = true;
     @observable isProcessing = true;
 
-    constructor(rootStore, userService) {
+    constructor(rootStore) {
         this.rootStore = rootStore
-        this.userService = userService
-
         this.user = userService.loadUser()
     }
     
     @action
     signup(name) {
         this.isLoading = true
-        this.user = this.userService.signup(name)
+        this.user = userService.signup(name)
         this.isLoading = false
     }
 
     @action
     transferCoins(contact, amount) {
         this.isProcessing = true
-        this.user = this.userService.addMove(contact, amount)
+        this.user = userService.addMove(contact, amount)
         this.isProcessing = false
     }
 

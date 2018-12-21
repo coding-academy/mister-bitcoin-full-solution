@@ -133,10 +133,9 @@ function sort(arr) {
 function getContacts (filterBy = null) {
   return new Promise((resolve, reject) => { 
     var contactsToReturn = contacts;
-    if (filterBy && filterBy.term) {
-      const term = filterBy.term.toLocaleLowerCase();
+    if (filterBy) {
+      const {term} = filterBy;
       contactsToReturn = contacts.filter( contact => {
-        
         return contact.name.toLocaleLowerCase().includes(term) ||
                contact.phone.toLocaleLowerCase().includes(term) ||
                contact.email.toLocaleLowerCase().includes(term)

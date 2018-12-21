@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import {observable} from 'mobx'
 
 import MovesList from '../../components/MovesList'
-import {BitcoinService} from '../../services/BitcoinService'
+import bitcoinService from '../../services/BitcoinService'
 
 import './HomePage.css'
 import coinsImg from '../../assets/icons/coins.png'
@@ -17,7 +17,7 @@ class HomePage extends Component {
 
   async componentDidMount() {
     const coins = this.props.store.userStore.user.coins
-    this.bitcoinRate = await BitcoinService.getBitcoinRate(coins)
+    this.bitcoinRate = await bitcoinService.getBitcoinRate(coins)
   }
 
   render() {

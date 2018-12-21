@@ -5,9 +5,9 @@ import {observable} from 'mobx'
 import MovesList from '../../components/MovesList'
 import {BitcoinService} from '../../services/BitcoinService'
 
+import './HomePage.css'
 import coinsImg from '../../assets/icons/coins.png'
 import bitcoinImg from '../../assets/icons/bitcoin.png'
-import './HomePage.css'
 
 @inject('store')
 @observer

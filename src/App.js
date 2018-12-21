@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { /*BrowserRouter*/ HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import { inject, observer } from 'mobx-react';
 
-import MainNav from './components/MainNav/MainNav'
+import PrivateRoute from './components/PrivateRoute'
+import MainNav from './components/MainNav'
 
-import HomePage from './pages/HomePage/HomePage'
-import SignupPage from './pages/SignupPage/SignupPage'
-import StatisticPage from './pages/StatisticPage/StatisticPage'
-import ContactPage from './pages/ContactPage/ContactPage'
-import ContactDetails from './pages/ContactDetails/ContactDetails'
-import ContactEdit from './pages/ContactEdit/ContactEdit'
+import HomePage from './pages/HomePage'
+import SignupPage from './pages/SignupPage'
+import StatisticPage from './pages/StatisticPage'
+import ContactPage from './pages/ContactPage'
+import ContactDetails from './pages/ContactDetails'
+import ContactEdit from './pages/ContactEdit'
 
 import './App.css'
 @inject('store')

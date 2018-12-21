@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ContactPreview from '../ContactPreview/ContactPreview'
+import ContactPreview from '../ContactPreview'
 
 import './ContactList.css';
 

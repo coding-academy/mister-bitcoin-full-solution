@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import {observable} from 'mobx'
 
-import MovesList from '../../components/MovesList/MovesList'
+import MovesList from '../../components/MovesList'
 import {BitcoinService} from '../../services/BitcoinService'
 
 import coinsImg from '../../assets/icons/coins.png'

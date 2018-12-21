@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import ContactList from '../../components/ContactList/ContactList'
-import ContactFilter from '../../components/ContactFilter/ContactFilter'
+import ContactList from '../../components/ContactList'
+import ContactFilter from '../../components/ContactFilter'
 import { inject, observer } from 'mobx-react';
 
 import addImg from '../../assets/icons/plus.png'

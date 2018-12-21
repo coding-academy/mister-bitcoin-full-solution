@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Input.css'
-export class Input extends Component {
+
+export default class Input extends Component {
     
     onInputChange = (event) => {
       this.props.onInput({[this.props.field.name]: event.target.value});

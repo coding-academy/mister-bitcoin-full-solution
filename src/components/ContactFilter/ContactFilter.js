@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../Input/Input';
+import Input from '../Input';
 import './ContactFilter.css'
 
 const ContactFilter = (props) => {
@@ -13,4 +13,3 @@ const ContactFilter = (props) => {
 }
 
 export default ContactFilter
-

@@ -5,8 +5,8 @@ import ContactList from '../../components/ContactList'
 import ContactFilter from '../../components/ContactFilter'
 import { inject, observer } from 'mobx-react';
 
-import addImg from '../../assets/icons/plus.png'
 import './ContactPage.css'
+import addImg from '../../assets/icons/plus.png'
 
 @inject('store')
 @observer

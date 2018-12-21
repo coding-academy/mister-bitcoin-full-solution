@@ -1,4 +1,3 @@
-
 const contacts = [
   {
     "_id": "5a56640269f443a5d64b32ca",
@@ -195,14 +194,10 @@ function getEmptyContact() {
 
 function filter (term) {
   term = term.toLocaleLowerCase()
-  return new Promise((resolve, reject) => { 
-    const c = contacts.filter( contact => {
-      return contact.name.toLocaleLowerCase().includes(term) ||
-             contact.phone.toLocaleLowerCase().includes(term) ||
-             contact.email.toLocaleLowerCase().includes(term)
-    })
-
-    resolve(c)
+  return contacts.filter( contact => {
+    return contact.name.toLocaleLowerCase().includes(term) ||
+           contact.phone.toLocaleLowerCase().includes(term) ||
+           contact.email.toLocaleLowerCase().includes(term)
   })
 }
 

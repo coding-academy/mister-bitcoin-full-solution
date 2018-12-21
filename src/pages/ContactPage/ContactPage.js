@@ -17,7 +17,7 @@ class ContactPage extends Component {
   }
 
   contactSearch = (term) => {
-    this.props.store.contactStore.fetchContacts(term)
+    this.props.store.contactStore.fetchContacts({term})
   }
   
   render() {

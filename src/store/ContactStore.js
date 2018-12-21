@@ -9,12 +9,10 @@ export class ContactStore {
     constructor(rootStore, contactService) {
         this.rootStore = rootStore
         this.contactService = contactService
-        this.fetchContacts()
     }
 
     @action
-    async fetchContacts(term = null) {
-        const filterBy = {term}
+    async fetchContacts(filterBy = null) {
         this.isLoading = true
         this.contacts = await this.contactService.getContacts(filterBy)
         this.isLoading = false

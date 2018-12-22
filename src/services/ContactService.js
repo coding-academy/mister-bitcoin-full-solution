@@ -132,13 +132,8 @@ function sort(arr) {
 function getContacts (filterBy = null) {
   return new Promise((resolve, reject) => { 
     var contactsToReturn = contacts;
-    if (filterBy) {
-      const {term} = filterBy;
-      contactsToReturn = contacts.filter( contact => {
-        return contact.name.toLocaleLowerCase().includes(term) ||
-               contact.phone.toLocaleLowerCase().includes(term) ||
-               contact.email.toLocaleLowerCase().includes(term)
-      })
+    if (filterBy && filterBy.term) {
+      contactsToReturn = filter(filterBy.term)
     }
     resolve(sort(contactsToReturn))
   })
@@ -205,7 +200,6 @@ export default {
   getContacts,
   getContactById,
   deleteContact,
-  filter,
   saveContact,
   getEmptyContact
 }

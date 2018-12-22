@@ -1,6 +1,6 @@
 import {UserStore} from '../UserStore'
 
-import {UserService} from '../../services/UserService'
+import userService from '../../services/UserService'
 jest.mock('../../services/UserService');
 
 describe('UserStore', () => {
@@ -13,28 +13,28 @@ describe('UserStore', () => {
     }
 
     beforeEach(() => {
-        UserService.loadUser.mockReturnValue(newUser)
-        store = new UserStore(null, UserService)
+        userService.loadUser.mockReturnValue(newUser)
+        store = new UserStore(null)
     })
 
     it('should signup successfully', async () => {
         expect.assertions(5)
 
-        UserService.signup.mockReturnValue(newUser)
+        userService.signup.mockReturnValue(newUser)
         store.signup('aa')
 
         expect(store.user).toBeTruthy()
         expect(store.user.name).toBe(newUser.name)
         expect(store.user.coins).toBe(newUser.coins)
         expect(store.user.moves.length).toBe(0)
-        expect(UserService.signup).toBeCalled()
+        expect(userService.signup).toBeCalled()
     })
 
     it('should call to update move', async () => {
         expect.assertions(1)
-        UserService.addMove.mockReturnValue(newUser)
+        userService.addMove.mockReturnValue(newUser)
         store.transferCoins(null, 2)
-        expect(UserService.addMove).toBeCalled()
+        expect(userService.addMove).toBeCalled()
     })
 
     it('should return moves of specific contact', async () => {
@@ -58,8 +58,8 @@ describe('UserStore', () => {
             ]
         }
 
-        UserService.loadUser.mockReturnValue(user)
-        store = new UserStore(rootStore, UserService)
+        userService.loadUser.mockReturnValue(user)
+        store = new UserStore(rootStore)
 
         expect(store.movesToCurrContact.length).toBe(1)
     })

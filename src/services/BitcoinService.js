@@ -1,10 +1,17 @@
 import axios from 'axios'
 
-const getBitcoinRate = (value) => {
+export default {
+    getBitcoinRate,
+    getMarketPrice,
+    getConfirmedTransactions
+}
+
+
+function getBitcoinRate(value)  {
     return getRequest(`https://blockchain.info/tobtc?currency=USD&value=${value}`)
 }
 
-const getMarketPrice = async () => {
+async function getMarketPrice() {
     const res = await getRequest('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true')
     return {
         title: res.name,
@@ -13,7 +20,7 @@ const getMarketPrice = async () => {
     }
 }
 
-const getConfirmedTransactions = async () => {
+async function getConfirmedTransactions () {
     const res = await getRequest('https://api.blockchain.info/charts/n-transactions?format=json&cors=true')
     return {
         title: res.name,
@@ -22,15 +29,10 @@ const getConfirmedTransactions = async () => {
     }
 }
 
-const getRequest = (url) => {
+function getRequest(url) {
     return axios.get(url)
         .then(res => res.data)
 }
 
 
 
-export default {
-    getBitcoinRate,
-    getMarketPrice,
-    getConfirmedTransactions
-}

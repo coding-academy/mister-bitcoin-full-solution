@@ -14,8 +14,13 @@ import editImg from '../../assets/icons/edit.png'
 @inject('store')
 @observer
 class ContactDetails extends Component {
-  
+  state = {};
   @observable message = ''
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('getDerivedStateFromProps', ...arguments);
+    
+  }
 
   constructor(props) {
     super(props);
@@ -27,6 +32,9 @@ class ContactDetails extends Component {
     const id = this.props.match.params.id; // params -> from url
     this.props.store.contactStore.fetchContact(id)
   }
+  componentDidUpdate() {
+    console.log('UPDATE', ...arguments);
+  }
 
   async transferCoins(amount) {
     const contact = this.props.store.contactStore.selectedContact
@@ -35,11 +43,14 @@ class ContactDetails extends Component {
     setTimeout(() => this.message = '', 1000);
   }
 
-  renderHeader(contact) {
+  renderHeader(contact, nextContactId) {
     return (
       <header className="contact-details-header">
         <Link to={`/contacts`} >
           <img src={backImg} width="24px" height="24px" alt="Back" />
+        </Link>
+        <Link to={`/contacts/${nextContactId}`}>
+          Next >
         </Link>
         <Link to={`/contacts/edit/${contact._id}`}>
           <img src={editImg} width="24px" height="24px" alt="Edit" />
@@ -52,13 +63,15 @@ class ContactDetails extends Component {
     if (this.props.store.contactStore.isLoading) return <div>Loading...</div>
 
     const contact = this.props.store.contactStore.selectedContact
+    const nextContactId = this.props.store.contactStore.nextContactId
+
     const maxCoins = this.props.store.userStore.user.coins
     const avatar = contact.picture || imgAvatar
     const message = this.message
 
     return (
       <div className="contact-details">
-        {this.renderHeader(contact)}
+        {this.renderHeader(contact, nextContactId)}
         <div className="contact-details-message">{message}</div>
         <div className="contact-details-body">
           <img src={avatar} alt="Person" width="96" height="96" />

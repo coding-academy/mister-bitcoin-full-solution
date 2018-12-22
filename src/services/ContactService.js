@@ -5,7 +5,8 @@ export default {
   getContactById,
   deleteContact,
   saveContact,
-  getEmptyContact
+  getEmptyContact,
+  getNextContactId
 }
 
 function getEmptyContact() {
@@ -32,6 +33,14 @@ function getContactById (id) {
       contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
     })
 }
+function getNextContactId (id) {
+  return new Promise((resolve, reject) => {
+    const contactIdx = contacts.findIndex( contact => contact._id === id)
+    const nextContactIdx = (contactIdx === contacts.length-1)? 0 : contactIdx+1
+    resolve(contacts[nextContactIdx]._id)
+  })
+}
+
 
 function deleteContact(id) {
   return new Promise((resolve, reject) => { 

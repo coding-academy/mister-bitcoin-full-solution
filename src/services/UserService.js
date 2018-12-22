@@ -7,7 +7,7 @@ export default {
 
 
 function signup(name) {
-    const user = {name, coins: 100, moves: []}
+    const user = {name, coins: 10000, moves: []}
     _saveToLocal(user)
 
     return user

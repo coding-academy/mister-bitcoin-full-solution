@@ -3,12 +3,13 @@ import axios from 'axios'
 export default {
     getBitcoinRate,
     getMarketPrice,
-    getConfirmedTransactions
+    getConfirmedTransactions,
+    watchBitcoinRate
 }
 
 
-function getBitcoinRate(value)  {
-    return _getRequest(`https://blockchain.info/tobtc?currency=USD&value=${value}`)
+function getBitcoinRate(dollars=1)  {
+    return _getRequest(`https://blockchain.info/tobtc?currency=USD&value=${dollars}`)
 }
 
 async function getMarketPrice() {
@@ -28,6 +29,20 @@ async function getConfirmedTransactions () {
         description: res.description
     }
 }
+
+var lastRate = null;
+function watchBitcoinRate(cb) {
+    const getRate = async ()=>{
+        let rate = await getBitcoinRate(1)
+        if (rate === lastRate) return;
+        lastRate = rate;        
+        rate = rate.toFixed(8)
+        cb(+rate)
+    }
+    getRate();
+    setInterval(getRate, 4000)
+}
+
 
 function _getRequest(url) {
     return axios.get(url)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { computed } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import {observable} from 'mobx'
 
@@ -14,10 +15,22 @@ import bitcoinImg from '../../assets/icons/bitcoin.png'
 class HomePage extends Component {
   
   @observable bitcoinRate = 0
+  @observable imgCoinsClassName = ''
+  
 
-  async componentDidMount() {
+  async componentDidMount() { 
+    bitcoinService.watchBitcoinRate((rate)=>{
+      this.bitcoinRate = rate
+      this.imgCoinsClassName = 'animated wobble'
+      setTimeout(()=>{
+        this.imgCoinsClassName = ''
+      }, 2000)
+    })
+  }
+
+  @computed get balance() {
     const coins = this.props.store.userStore.user.coins
-    this.bitcoinRate = await bitcoinService.getBitcoinRate(coins)
+    return +((this.bitcoinRate * coins).toFixed(2));
   }
 
   render() {
@@ -28,7 +41,8 @@ class HomePage extends Component {
           <div className="user-details">
             <div className="user-name">Hello {name}!</div>
             <div className="user-coins-count">
-              <img src={coinsImg} alt="coins" width="24px" height="24px" /> Coins: {coins} 
+              <img src={coinsImg} alt="coins" width="24px" height="24px" className={this.imgCoinsClassName}/> 
+              Balance: {coins}$ | {this.balance}Ƀ
             </div>
             <div className="user-coins-rate">
             <img src={bitcoinImg} alt="bitcoin" width="24px" height="24px" /> BTC: {this.bitcoinRate}

@@ -4,7 +4,7 @@ import {UserStore} from './UserStore'
 class RootStore {
 
     constructor() {
-      this.contactStore = new ContactStore(this)
+      this.contactStore = new ContactStore()
       this.userStore = new UserStore(this)
     }
 

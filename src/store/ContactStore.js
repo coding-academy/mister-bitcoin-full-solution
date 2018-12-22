@@ -7,10 +7,6 @@ export class ContactStore {
     @observable isLoading = false
     @observable status = ''
     
-    constructor(rootStore) {
-        this.rootStore = rootStore
-    }
-
     @action
     async fetchContacts(filterBy = null) {
         this.isLoading = true

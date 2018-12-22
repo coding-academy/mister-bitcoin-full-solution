@@ -14,8 +14,20 @@ import editImg from '../../assets/icons/edit.png'
 @inject('store')
 @observer
 class ContactDetails extends Component {
-  
+  state = {
+    currentId: ''
+  };
   @observable message = ''
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.match.params.id !== prevState.currentId){
+      return { currentId: nextProps.match.params.id};
+    } 
+    else {
+        return null;
+    }
+
+  }
 
   constructor(props) {
     super(props);
@@ -26,6 +38,22 @@ class ContactDetails extends Component {
   componentDidMount() {
     const id = this.props.match.params.id; // params -> from url
     this.props.store.contactStore.fetchContact(id)
+    this.setState({currentId: id})
+  }
+
+  componentDidUpdate(prevProps) {
+    /**
+      * this is the initial render
+      * without a previous prop change
+      */
+    if(prevProps === undefined) {
+      return false
+    }
+
+    if(prevProps.match.params.id !== this.state.currentId){
+      //fetchContact and set state to reload
+      this.props.store.contactStore.fetchContact(this.state.currentId)
+    }
   }
 
   async transferCoins(amount) {
@@ -35,11 +63,14 @@ class ContactDetails extends Component {
     setTimeout(() => this.message = '', 1000);
   }
 
-  renderHeader(contact) {
+  renderHeader(contact, nextContactId) {
     return (
       <header className="contact-details-header">
         <Link to={`/contacts`} >
           <img src={backImg} width="24px" height="24px" alt="Back" />
+        </Link>
+        <Link to={`/contacts/${nextContactId}`}>
+          Next >
         </Link>
         <Link to={`/contacts/edit/${contact._id}`}>
           <img src={editImg} width="24px" height="24px" alt="Edit" />
@@ -52,13 +83,15 @@ class ContactDetails extends Component {
     if (this.props.store.contactStore.isLoading) return <div>Loading...</div>
 
     const contact = this.props.store.contactStore.selectedContact
+    const nextContactId = this.props.store.contactStore.nextContactId
+
     const maxCoins = this.props.store.userStore.user.coins
     const avatar = contact.picture || imgAvatar
     const message = this.message
 
     return (
       <div className="contact-details">
-        {this.renderHeader(contact)}
+        {this.renderHeader(contact, nextContactId)}
         <div className="contact-details-message">{message}</div>
         <div className="contact-details-body">
           <img src={avatar} alt="Person" width="96" height="96" />

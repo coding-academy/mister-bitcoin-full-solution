@@ -1,9 +1,10 @@
 import { observable, action  } from 'mobx';
 import contactService from '../services/ContactService'
 export class ContactStore {
-    @observable contacts = [];
-    @observable selectedContact = {};
-    @observable isLoading = false;
+    @observable contacts = []
+    @observable selectedContact = {}
+    @observable nextContactId = ''
+    @observable isLoading = false
     @observable status = ''
     
     constructor(rootStore) {
@@ -23,6 +24,7 @@ export class ContactStore {
         this.isLoading = true
         try {
             this.selectedContact = await contactService.getContactById(id)
+            this.nextContactId  = await contactService.getNextContactId(id)
         } catch(err) {
             this.status = 'error'
         } finally{

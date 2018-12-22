@@ -14,12 +14,19 @@ import editImg from '../../assets/icons/edit.png'
 @inject('store')
 @observer
 class ContactDetails extends Component {
-  state = {};
+  state = {
+    currentId: ''
+  };
   @observable message = ''
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('getDerivedStateFromProps', ...arguments);
-    
+    if(nextProps.match.params.id !== prevState.currentId){
+      return { currentId: nextProps.match.params.id};
+    } 
+    else {
+        return null;
+    }
+
   }
 
   constructor(props) {
@@ -31,9 +38,22 @@ class ContactDetails extends Component {
   componentDidMount() {
     const id = this.props.match.params.id; // params -> from url
     this.props.store.contactStore.fetchContact(id)
+    this.setState({currentId: id})
   }
-  componentDidUpdate() {
-    console.log('UPDATE', ...arguments);
+
+  componentDidUpdate(prevProps) {
+    /**
+      * this is the initial render
+      * without a previous prop change
+      */
+    if(prevProps === undefined) {
+      return false
+    }
+
+    if(prevProps.match.params.id !== this.state.currentId){
+      //fetchContact and set state to reload
+      this.props.store.contactStore.fetchContact(this.state.currentId)
+    }
   }
 
   async transferCoins(amount) {

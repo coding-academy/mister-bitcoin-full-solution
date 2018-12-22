@@ -35,6 +35,13 @@ class TransferCoins extends Component {
       
       this.props.onTransferCoins(amountNum)
       this.setState({amount: '', error: ''})
+      this.elAnimValue.innerText = amountNum
+      
+      this.elAnimValue.style.animation = 'sendCoinAnimation 1s infinite'
+      setTimeout(() => {
+        this.elAnimValue.style.animation = ''
+      }, 1000);
+      
     }
   
     onInputChange = (event) => {
@@ -47,6 +54,7 @@ class TransferCoins extends Component {
       return (
         <div className='transfer-coins'>
           <div>Transfer coins to {this.props.contact.name}:</div>
+          <span className="anim-value" ref={(elAnimValue) => { this.elAnimValue = elAnimValue }}></span>
           <form onSubmit={this.onFormSubmit} className='transfer-form'>
             <label>Amount:</label>
               <input 

@@ -1,34 +1,37 @@
-const signup = (name) => {
-    const user = {name, coins: 100, moves: []}
-    saveToLocal(user)
 
-    return user
-}
-
-const loadUser = () => {
-    return loadFromLocal()
-}
-
-const addMove = (toContact, amount) => {
-    const user = loadFromLocal()
-    user.moves.unshift({toId: toContact._id, to: toContact.name, amount, at: Date.now()})
-    user.coins -= amount
-    saveToLocal(user)
-    return user
-}
-
-const saveToLocal = (user) => {
-    localStorage.setItem('user', JSON.stringify(user))
-}
-
-const loadFromLocal = () => {
-    const user = localStorage.getItem('user')
-    if (!user) return null
-
-    return JSON.parse(user)
-}
 export default {
     signup,
     loadUser,
     addMove
+}
+
+
+function signup(name) {
+    const user = {name, coins: 100, moves: []}
+    _saveToLocal(user)
+
+    return user
+}
+
+function loadUser() {
+    return _loadFromLocal()
+}
+
+function addMove(toContact, amount){
+    const user = _loadFromLocal()
+    user.moves.unshift({toId: toContact._id, to: toContact.name, amount, at: Date.now()})
+    user.coins -= amount
+    _saveToLocal(user)
+    return user
+}
+
+function _saveToLocal(user){
+    localStorage.setItem('user', JSON.stringify(user))
+}
+
+function _loadFromLocal() {
+    const user = localStorage.getItem('user')
+    if (!user) return null
+
+    return JSON.parse(user)
 }

@@ -19,13 +19,14 @@ class HomePage extends Component {
   
 
   async componentDidMount() { 
-    bitcoinService.watchBitcoinRate((rate)=>{
+    this.stopWatching = bitcoinService.watchBitcoinRate((rate)=>{
       this.bitcoinRate = rate
       this.imgCoinsClassName = 'animated wobble'
-      setTimeout(()=>{
-        this.imgCoinsClassName = ''
-      }, 2000)
+      setTimeout(()=>this.imgCoinsClassName = '', 2000)
     })
+  }
+  componentWillUnmount() {
+    this.stopWatching();
   }
 
   @computed get balance() {

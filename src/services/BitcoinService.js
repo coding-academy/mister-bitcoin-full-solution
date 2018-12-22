@@ -37,10 +37,13 @@ function watchBitcoinRate(cb) {
         if (rate === lastRate) return;
         lastRate = rate;        
         rate = rate.toFixed(8)
+        
         cb(+rate)
     }
+    // Kick it off immediately and then every 4 secs
     getRate();
-    setInterval(getRate, 4000)
+    var interval = setInterval(getRate, 4000)
+    return ()=>clearInterval(interval)
 }
 
 

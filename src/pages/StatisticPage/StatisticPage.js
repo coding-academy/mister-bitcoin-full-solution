@@ -6,18 +6,23 @@ import Chart from '../../components/Chart';
 
 import bitcoinService from '../../services/BitcoinService'
 import './StatisticPage.css'
-@inject('store')
+// @inject('store')
 @observer
 class StatisticPage extends Component {
   
-  @observable marketPrice = null
-  @observable confirmedTransactions = null
+  @observable chartsData = null
   @observable loading = true
 
   async componentDidMount() {
     this.loading = true
-    this.marketPrice = await bitcoinService.getMarketPrice()
-    this.confirmedTransactions = await bitcoinService.getConfirmedTransactions()
+
+    this.chartsData = await Promise.all([
+      bitcoinService.getMarketPrice(), 
+      bitcoinService.getConfirmedTransactions()
+    ])
+
+    console.log(this.chartsData)
+    
     this.loading = false
   }
 
@@ -36,11 +41,15 @@ class StatisticPage extends Component {
   render() {
     if (this.loading) return <div>Loading...</div>
 
+    const colors = ['blue', 'green']
     return (
       <div className="statistic-page">
         <ul>
-          {this.renderChart(this.marketPrice, 'blue')}
-          {this.renderChart(this.confirmedTransactions, 'green')}
+        {
+          this.chartsData.map( (chart, idx) => 
+            <li className="statistic-chart" key={idx}>{this.renderChart(chart, colors[idx])}</li>
+          )
+        }
         </ul>
       </div>
     );

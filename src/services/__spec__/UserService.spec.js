@@ -10,7 +10,7 @@ describe('UserService', () => {
         const user = userService.signup(name)
         expect(user).toBeTruthy()
         expect(user.name).toBe(name)
-        expect(user.coins).toBe(100)
+        expect(user.coins).toBe(10000)
         expect(user.moves.length).toBe(0)
     })
 
@@ -26,10 +26,11 @@ describe('UserService', () => {
     it('should add move to user successfully', () => {
         expect.assertions(3)
 
-        userService.signup(name)
-        const user = userService.addMove({name: 'Puki', _id: '123'}, 3)
+        const coinsToTransfer = 3
+        const newUser = userService.signup(name)
+        const user = userService.addMove({name: 'Puki', _id: '123'}, coinsToTransfer)
         expect(user).toBeTruthy()
         expect(user.name).toBe(name)
-        expect(user.coins).toBe(97)
+        expect(user.coins).toBe(newUser.coins - coinsToTransfer)
     })
 })

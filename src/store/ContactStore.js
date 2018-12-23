@@ -23,7 +23,6 @@ export class ContactStore {
             this.nextContactId  = await contactService.getNextContactId(id)
         } catch(err) {
             this.status = 'error'
-            this.selectedContact = {}
         } finally{
             this.isLoading = false
         }

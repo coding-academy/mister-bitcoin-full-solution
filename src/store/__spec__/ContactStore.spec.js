@@ -21,7 +21,7 @@ describe('ContactStore', () => {
     let store;
 
     beforeEach(() => {
-        store = new ContactStore(null, contactService)
+        store = new ContactStore()
         contactService.getContacts.mockReset()
         contactService.getContactById.mockReset()
     })
@@ -48,7 +48,7 @@ describe('ContactStore', () => {
 
     it('should set status to error when fetch rejected', async () => {
         expect.assertions(3)
-
+        const error = 'some error'
         contactService.getContactById.mockImplementation(() => Promise.reject(error));
         await store.fetchContact('aaa')
 

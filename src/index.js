@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {store} from './store/RootStore'
 
 import './assets/styles.css'
+import 'animate.css'
 
 ReactDOM.render(
     <Provider store={store}>

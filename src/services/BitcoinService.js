@@ -1,11 +1,19 @@
 import axios from 'axios'
 
-const getBitcoinRate = (value) => {
-    return getRequest(`https://blockchain.info/tobtc?currency=USD&value=${value}`)
+export default {
+    getBitcoinRate,
+    getMarketPrice,
+    getConfirmedTransactions,
+    watchBitcoinRate
 }
 
-const getMarketPrice = async () => {
-    const res = await getRequest('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true')
+
+function getBitcoinRate(dollars=1)  {
+    return _getRequest(`https://blockchain.info/tobtc?currency=USD&value=${dollars}`)
+}
+
+async function getMarketPrice() {
+    const res = await _getRequest('https://api.blockchain.info/charts/market-price?timespan=5months&format=json&cors=true')
     return {
         title: res.name,
         data: res.values.map(point => point.y), 
@@ -13,8 +21,8 @@ const getMarketPrice = async () => {
     }
 }
 
-const getConfirmedTransactions = async () => {
-    const res = await getRequest('https://api.blockchain.info/charts/n-transactions?format=json&cors=true')
+async function getConfirmedTransactions () {
+    const res = await _getRequest('https://api.blockchain.info/charts/n-transactions?format=json&cors=true')
     return {
         title: res.name,
         data: res.values.map(point => point.y), 
@@ -22,15 +30,27 @@ const getConfirmedTransactions = async () => {
     }
 }
 
-const getRequest = (url) => {
+var lastRate = null;
+function watchBitcoinRate(cb) {
+    const getRate = async ()=>{
+        let rate = await getBitcoinRate(1)
+        if (rate === lastRate) return;
+        lastRate = rate;        
+        rate = rate.toFixed(8)
+        
+        cb(+rate)
+    }
+    // Kick it off immediately and then every 4 secs
+    getRate();
+    var interval = setInterval(getRate, 4000)
+    return ()=>clearInterval(interval)
+}
+
+
+function _getRequest(url) {
     return axios.get(url)
         .then(res => res.data)
 }
 
 
 
-export default {
-    getBitcoinRate,
-    getMarketPrice,
-    getConfirmedTransactions
-}

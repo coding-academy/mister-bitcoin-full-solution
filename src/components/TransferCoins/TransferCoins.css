@@ -33,3 +33,22 @@
 .error {
   color: red;
 }
+
+.anim-value{
+  opacity: 0;
+  font-family: 'Lato', sans-serif;            
+  position: absolute;
+  left: 62px;
+  bottom: 20px;
+  z-index: 1;
+  padding: 0 15px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes sendCoinAnimation {
+  0%   { opacity: 0; font-size: 1em;}
+  1%   { opacity: 1; }
+  50% { transform: translate(15px,-50px);font-size: 1.3em ;}
+  60% { opacity: 0.7; }
+  100% { opacity: 0; transform: translate(35px,110px) ;color: #039b21;}
+}

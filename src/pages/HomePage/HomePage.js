@@ -23,13 +23,7 @@ class HomePage extends Component {
 
   async componentDidMount() {
     this.stopWatching = bitcoinService.watchBitcoinRate((rate)=>{
-
-      if (rate === this.bitcoinRate) {
-        this.imgArrow = null
-      } else {
-        this.imgArrow = rate > this.bitcoinRate ? upImg : downImg
-      }
-
+      this.imgArrow = rate > this.bitcoinRate ? upImg : downImg
       this.bitcoinRate = rate
       this.imgCoinsClassName = 'animated wobble'
       setTimeout(()=>this.imgCoinsClassName = '', 2000)

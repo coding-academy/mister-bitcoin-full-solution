@@ -9,6 +9,8 @@ import bitcoinService from '../../services/BitcoinService'
 import './HomePage.css'
 import coinsImg from '../../assets/icons/coins.png'
 import bitcoinImg from '../../assets/icons/bitcoin.png'
+import upImg from '../../assets/icons/arrow-up.png'
+import downImg from '../../assets/icons/arrow-down.png'
 
 @inject('store')
 @observer
@@ -16,10 +18,12 @@ class HomePage extends Component {
   
   @observable bitcoinRate = 0
   @observable imgCoinsClassName = ''
+  @observable imgArrow = null
   
 
-  async componentDidMount() { 
+  async componentDidMount() {
     this.stopWatching = bitcoinService.watchBitcoinRate((rate)=>{
+      this.imgArrow = rate > this.bitcoinRate ? upImg : downImg
       this.bitcoinRate = rate
       this.imgCoinsClassName = 'animated wobble'
       setTimeout(()=>this.imgCoinsClassName = '', 2000)
@@ -46,7 +50,8 @@ class HomePage extends Component {
               Balance: {coins}$ | {this.balance}Ƀ
             </div>
             <div className="user-coins-rate">
-            <img src={bitcoinImg} alt="bitcoin" width="24px" height="24px" /> BTC: {this.bitcoinRate}
+              <img src={bitcoinImg} alt="bitcoin" width="24px" height="24px" /> BTC: {this.bitcoinRate}
+              {this.imgArrow && <img src={this.imgArrow} alt="arrow" width="16px" height="16px"/> }
             </div>
           </div>
           <MovesList showContactName moves={this.props.store.userStore.lastMoves} title="Your last 3 Moves:"/>

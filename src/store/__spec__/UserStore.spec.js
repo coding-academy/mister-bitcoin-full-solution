@@ -60,7 +60,8 @@ describe('UserStore', () => {
 
         userService.loadUser.mockReturnValue(user)
         store = new UserStore(rootStore)
-
+        store.fetchUser()
+        
         expect(store.movesToCurrContact.length).toBe(1)
     })
     

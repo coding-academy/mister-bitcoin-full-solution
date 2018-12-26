@@ -7,6 +7,10 @@ export class UserStore {
 
     constructor(rootStore) {
         this.rootStore = rootStore
+    }
+
+    @action
+    fetchUser() {
         this.user = userService.loadUser()
     }
     

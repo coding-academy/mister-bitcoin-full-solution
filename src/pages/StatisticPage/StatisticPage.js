@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 
 import Chart from '../../components/Chart';
 
 import bitcoinService from '../../services/BitcoinService'
 import './StatisticPage.css'
-// @inject('store')
 @observer
 class StatisticPage extends Component {
   
@@ -21,8 +20,6 @@ class StatisticPage extends Component {
       bitcoinService.getConfirmedTransactions()
     ])
 
-    console.log(this.chartsData)
-    
     this.loading = false
   }
 

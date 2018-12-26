@@ -64,7 +64,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -82,7 +83,7 @@
     ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "./config/jest/setup.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -130,6 +131,15 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.2.2"
+    "@babel/plugin-proposal-decorators": "^7.2.2",
+    "@storybook/addon-actions": "^4.1.1",
+    "@storybook/addon-knobs": "^4.1.2",
+    "@storybook/addons": "^4.1.1",
+    "@storybook/react": "^4.1.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-15": "^1.2.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "react-test-renderer": "^16.6.3",
+    "storybook-react-router": "^1.0.2"
   }
 }

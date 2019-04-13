@@ -26,12 +26,10 @@ class StatisticPage extends Component {
   renderChart(chart, color) {
     const {title, data, description} = chart
     return (
-      <li className="statistic-chart">
-        <Chart title={title} 
-              data={data} 
-              description={description} 
-              color={color} />
-      </li>
+      <Chart title={title} 
+            data={data} 
+            description={description} 
+            color={color} />
     )
   }
 
@@ -44,8 +42,7 @@ class StatisticPage extends Component {
         <ul>
         {
           this.chartsData.map( (chart, idx) => 
-            <li className="statistic-chart" key={idx}>{this.renderChart(chart, colors[idx])}</li>
-          )
+            <li className="statistic-chart" key={idx}>{this.renderChart(chart, colors[idx])}</li>)
         }
         </ul>
       </div>
